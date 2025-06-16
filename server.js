@@ -23,11 +23,27 @@ mongoose.connect(process.env.DB_URI, {
 // Middleware to parse JSON bodies
 app.use(express.json());
 // CORS middleware
+const allowedOrigins = [
+  'http://localhost:5173', // Your development frontend
+  'https://your-deployed-frontend.com' // Your deployed frontend domain
+  // Add other origins if your API serves multiple frontends
+];
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', // Allow requests from this origin
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  origin: function (origin, callback) {
+    // allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) === -1) {
+      const msg = 'The CORS policy for this site does not allow access from the specified Origin.';
+      return callback(new Error(msg), false);
+    }
+    return callback(null, true);
+  },
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed methods
+  credentials: true, // Allow cookies to be sent across origins
+  optionsSuccessStatus: 204 // Some legacy browsers (IE11, various SmartTVs) choke on 204
 }));
+
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
