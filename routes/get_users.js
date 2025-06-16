@@ -1,0 +1,12 @@
+import express from 'express';
+const router = express.Router();
+
+import getUsers from '../controllers/social_interaction/get_users.js';
+import isAuthenticated from '../auth/isAuthenticated.js';
+// Route to get all users
+router.get('/users', isAuthenticated, getUsers);
+// This route allows authenticated users to retrieve a list of all users
+// The `isAuthenticated` middleware checks if the user is logged in before allowing access to this route.
+// Export the router to be used in the main app
+export default router;
+// This code defines a route for getting all users in an Express application.

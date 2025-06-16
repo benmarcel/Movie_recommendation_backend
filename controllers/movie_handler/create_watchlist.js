@@ -5,6 +5,13 @@ import User from "../../models/user_schema.js";
 const createWatchlist = async (req, res) => {
   const { name } = req.body;
   const userId = req.user.id;
+  if (!name || !userId) {
+    return res.status(400).json({ message: "Name and User ID are required." });
+  }
+  // Ensure userId is provided, typically set by authentication middleware
+  if (typeof name !== 'string' || name.trim() === '') {
+    return res.status(400).json({ message: "Invalid watchlist name." });
+  }
 
   try {
     const userExists = await User.findById(userId);

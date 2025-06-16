@@ -24,26 +24,30 @@ mongoose.connect(process.env.DB_URI, {
 app.use(express.json());
 // CORS middleware
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:3000', // Allow requests from this origin
-  credentials: true // Allow credentials (cookies, authorization headers, etc.)
+  origin: process.env.CORS_ORIGIN || 'http://localhost:5173', // Allow requests from this origin
+  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
 }));
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
 // Session middleware
+// const isProduction = process.env.NODE_ENV === 'production';
+
 app.use(session({
   secret: process.env.SESSION_SECRET,         
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.DB_URI, // Use the same DB URI for session storage
-    autoRemove: 'native',            // Automatically remove expired sessions
-    // Collection name for sessions
+    mongoUrl: process.env.DB_URI,
+    autoRemove: 'native',            
     collectionName: 'sessions',     
     ttl: 60 * 60                    
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60            // 1 hour
+    maxAge: 1000 * 60 * 60, // 1 hour
+    httpOnly: true, // Recommended: prevent client-side JavaScript access to the cookie
+    
   }
 }));
 
@@ -57,26 +61,80 @@ app.get('/', (req, res) => {
   }
 });
 
-// Import user access routes
+// user access routes
 import signup from './routes/signup.js';
 import login from './routes/login.js';
-import profile from './routes/profile.js';
-// destructure the functions from profile routes
-const {
-  getUserProfile,
-  updateUserProfile,
-  deleteUser
-} = profile
-
 import logout from './routes/logout.js';
+import checkSession from './routes/check_session.js'; // Import the route for checking session
+//  movie-related routes
+import addToFavorites from './routes/add_to_favorites.js';
+import createWatchlist from './routes/create_watchlist.js';
+import addToWatchlist from './routes/add_to_watchlist.js';
+import displayWatchlist from './routes/display_watchlist.js';
+import getWatchlistMovies from './routes/get_watchlist_movies.js';
+import rateMovie from './routes/rate_movie.js';
+import commentMovie from './routes/comment_movie.js';
+import getMovieReview from './routes/get_movie_review.js';
+import getMovies from './routes/get_movies.js'; // Import the route for getting movies
+import getWatchlistStatus from './routes/get_watchlist_status.js'; // Import the route for getting watchlist status
+import getFavoriteStatus from './routes/get_favorite_status.js'; // Import the route for getting favorite status
+import removeFromFavourites from './routes/remove_from_favorites.js'; // Import the route for removing from favorites
+import removeFromWatchlist from './routes/remove_from_watchlist.js'; // Import the route for removing from watchlist
+import getMovieDetails from './routes/get_movie_details.js'; // Import the route for getting movie details
+// profile management routes
+import getUserProfile from './routes/get_profile.js';
+import updateUserProfile from './routes/update_profile.js';
+import deleteUser from './routes/delete_user.js';
 
-// Use access routes
-app.use(signup);
-app.use(login);
-app.use(getUserProfile);
-app.use(updateUserProfile);
-app.use(deleteUser);
-app.use(logout);
+// social features routes
+import getUsers from './routes/get_users.js';
+import getAUser from './routes/get_a_user.js';
+import followUser from './routes/follow_user.js';
+import unfollowUser from './routes/unfollow_user.js';
+import shareWatchlist from './routes/share_list.js';
+import getSharedList from './routes/get_sharedList.js'; 
+
+// personalized recommendations route
+import personalizedRecc from './routes/personalized_recc.js'; // Import the route for personalized recommendations
+// Use routes
+app.use(signup); // Use the route for user signup
+app.use(login); // Use the route for user login
+app.use(getMovieDetails); // Use the route for getting movie details
+app.use(getUserProfile); // Use the route for getting user profile
+app.use(updateUserProfile); // Use the route for updating user profile
+app.use(deleteUser); // Use the route for deleting user account
+app.use(logout); // Use the route for user logout
+app.use(addToFavorites); // Use the route for adding to favorites
+app.use(addToWatchlist); // Use the route for adding to watchlist
+app.use(createWatchlist); // Use the route for creating a watchlist
+app.use(displayWatchlist); // Use the route for displaying watchlist
+app.use(getWatchlistMovies); // Use the route for getting watchlist movies
+app.use(rateMovie); // Use the route for rating a movie
+app.use(commentMovie); // Use the route for commenting on a movie
+app.use(getMovieReview); // Use the route for getting movie reviews
+app.use(getUsers); // Use the route for getting all users
+app.use(getAUser); // Use the route for getting a specific user
+app.use(followUser); // Use the route for following a user
+app.use(unfollowUser); // Use the route for unfollowing a user
+app.use(shareWatchlist); // Use the route for sharing a watchlist
+app.use(getSharedList); // Use the route for getting a shared list
+app.use(getMovies); // Use the route for getting movies
+app.use(checkSession); // Use the route for checking session status
+app.use(getWatchlistStatus); // Use the route for getting watchlist status
+app.use(getFavoriteStatus); // Use the route for getting favorite status
+app.use(removeFromFavourites); // Use the route for removing from favorites
+app.use(removeFromWatchlist); // Use the route for removing from watchlist
+app.use(personalizedRecc); // Use the route for personalized recommendations
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+// 404 Not Found handler
+app.use((req, res) => {
+  res.status(404).send('Not Found');
+});
 
 // listen on port 3000
 app.listen(3000, () => {

@@ -5,17 +5,16 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const signup = async (req, res) => {
-  const { username, password, email } = req.body;
+  const { username, password, email, age } = req.body;
 
-  if (!username || !password || !email) {
-    return res.status(400).json({ message: "Username, password, and email are required" });
+  if (!username || !password || !email || !age) {
+    return res.status(400).json({ message: "Username, password, email, and age are required" });
   }
   // Validate email format
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email)) {
     return res.status(400).json({ message: "Invalid email format" });
   }
-
   try {
     // Check if the user already exists
     const existingUser = await User.findOne({ email });
@@ -48,6 +47,8 @@ const signup = async (req, res) => {
     // for automatic login after signup
     req.session.user = {
       id: user._id,
+      username: user.username,
+      email: user.email,
       token,
     };
     // Return the created user without the password
@@ -58,11 +59,12 @@ const signup = async (req, res) => {
             username: user?.username,
             email: user.email,
             createdAt: user.createdAt,
-            profilePicture: user.profilePicture || '',
+            age: user.age || "",
             followers: user.followers.length,
             following: user.following.length,
             favorites: user.favorites.length,
         }, 
+        success: true,
     });
   } catch (error) {
     if (error) {

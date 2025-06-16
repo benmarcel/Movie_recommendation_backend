@@ -4,7 +4,7 @@ import addToWatchlist from '../controllers/movie_handler/add_to_watchlist.js';
 // middleware to check if user is authenticated
 import isAuthenticated from '../auth/isAuthenticated.js';
 // Route to add a movie to the user's watchlist
-router.post('/addtowatchlist', isAuthenticated, addToWatchlist);
+router.post('/watchlist/add', isAuthenticated, addToWatchlist);
 // This route allows authenticated users to add a movie to their watchlist
 // It expects a POST request with the movie's TMDB ID and watchlist ID in the request body.
 // The isAuthenticated middleware checks if the user is logged in before allowing access to this route.

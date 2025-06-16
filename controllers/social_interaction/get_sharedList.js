@@ -1,32 +1,28 @@
-import Sharedlist from "../../models/shared_list.js";
+import Watchlist from '../../models/watchlist_schema.js';
 
-
-const getSharedList = async (req, res) => {
+const getSharedWatchlists = async (req, res) => {
   const userId = req.user.id;
 
   try {
-    // Find all shared lists where the user is either the fromUser or toUser
-    const sharedLists = await Sharedlist.find({
-      $or: [{ fromUser: userId }, { toUser: userId }],
-    })
-      .populate("fromUser", "username profilePicture")
-      .populate("toUser", "username profilePicture")
-      .populate("movies", "title posterPath overview releaseDate")
-      .sort({ sharedAt: -1 }); // Sort by sharedAt date in descending order
+    // Find all watchlists shared with the user
+    const watchlists = await Watchlist.find({ sharedWith: userId }).populate('movies');
 
-    // Check if any shared lists were found
-    // If no shared lists are found, return a 404 status
-    if (!sharedLists || sharedLists.length === 0) {
-      return res.status(404).json({ message: "No shared lists found" });
+    if (watchlists.length === 0) {
+      return res.status(404).json({ message: "No shared watchlists found" });
     }
 
-    res.status(200).json(sharedLists);
+    // Return the watchlists data
+    res.status(200).json({
+      message: "Shared watchlists retrieved successfully",
+      watchlists,
+    });
   } catch (error) {
     return res.status(500).json({
-      message: "Error fetching shared lists",
+      message: "Error retrieving shared watchlists",
       error: error.message,
     });
   }
 }
-export default getSharedList;
-// Export the function to be used in routes
+
+export default getSharedWatchlists;
+// This function handles fetching the shared watchlists of a user.

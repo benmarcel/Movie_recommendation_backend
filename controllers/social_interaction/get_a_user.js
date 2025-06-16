@@ -1,4 +1,4 @@
-import User from '../../models/user.js';
+import User from '../../models/user_schema.js';
 
 const getOneUser = async (req, res) => {
   const userId = req.params.id; // Assuming the user ID is passed as a URL parameter
@@ -6,8 +6,8 @@ const getOneUser = async (req, res) => {
   try {
     // Find the user by ID and populate followers and following
     const user = await User.findById(userId)
-      .populate('followers', 'username profilePicture')
-      .populate('following', 'username profilePicture')
+      .populate('followers', 'username')
+      .populate('following', 'username')
       .select('-password'); // Exclude password from the response
 
     if (!user) {
@@ -19,10 +19,8 @@ const getOneUser = async (req, res) => {
       id: user._id,
       username: user.username,
       email: user.email,
-      profilePicture: user.profilePicture || '',
       followers: user.followers,
       following: user.following,
-      favorites: user.favorites.length,
       createdAt: user.createdAt,
     });
   } catch (error) {

@@ -20,6 +20,7 @@ const reviewSchema = new Schema({
     rating: {
         type: Number,
         required: true,
+        default: 0, // Default rating is 0 if not provided
         min: 0,
         max: 5
     },

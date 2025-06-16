@@ -6,7 +6,7 @@ import logoutController from '../controllers/user_access/logout.js'; // Import t
 // Define the logout route
 // This route handles user logout requests
 // It expects a delete request to log out the user
-router.delete('/logout', logoutController);
+router.post('/logout', logoutController);
 
 // Export the router to be used in the main application file
 export default router;
