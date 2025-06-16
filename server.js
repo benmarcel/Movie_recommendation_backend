@@ -151,8 +151,8 @@ app.use((err, req, res, next) => {
 app.use((req, res) => {
   res.status(404).send('Not Found');
 });
-
+const PORT = process.env.PORT || 3000;
 // listen on port 3000
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });
