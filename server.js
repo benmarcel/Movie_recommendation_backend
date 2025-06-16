@@ -50,22 +50,29 @@ app.use(express.urlencoded({ extended: true }));
 // Session middleware
 // const isProduction = process.env.NODE_ENV === 'production';
 
+const isProduction = process.env.NODE_ENV === 'production'; // Determine if in production environment
+
 app.use(session({
-  secret: process.env.SESSION_SECRET,         
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.DB_URI,
-    autoRemove: 'native',            
-    collectionName: 'sessions',     
-    ttl: 60 * 60                    
+    autoRemove: 'native',
+    collectionName: 'sessions',
+    ttl: 60 * 60 // Session TTL in seconds (1 hour)
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60, // 1 hour
-    httpOnly: true, // Recommended: prevent client-side JavaScript access to the cookie
-    
+    maxAge: 1000 * 60 * 60, // Cookie lifespan in milliseconds (1 hour)
+    httpOnly: true, // Prevent client-side JavaScript access to the cookie
+
+    // *** CRITICAL COOKIE SETTINGS FOR DEPLOYMENT/CORS ***
+    secure: isProduction, // Set to true in production (HTTPS), false in development (HTTP)
+    sameSite: isProduction ? 'none' : 'lax', // 'none' for cross-site requests with `secure: true`, 'lax' for local
   }
 }));
+
+
 
 app.get('/', (req, res) => {
   if (req.session.views) {
