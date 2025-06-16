@@ -51,6 +51,13 @@ const signup = async (req, res) => {
       email: user.email,
       token,
     };
+     req.session.save((err) => {
+      if (err) {
+        console.error('Error saving session:', err);
+        // Respond with a server error if session saving fails
+        return res.status(500).json({ message: "Login failed due to session saving error", success: false });
+      }
+
     // Return the created user without the password
     res.status(201).json({
       message: "User created successfully",
@@ -66,6 +73,7 @@ const signup = async (req, res) => {
         }, 
         success: true,
     });
+  });
   } catch (error) {
     if (error) {
       return res
