@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 
 // import isAuthenticated from '../auth/isAuthenticated.js'; // Import your authentication middleware
-import checkSession from '../controllers/user_access/check_session.js';
+import checkSession from '../controllers/user_access/user_auth.js';
 
 // Define the route for checking session status
 router.get('/me', checkSession); // Ensure the user is authenticated before accessing this route

@@ -44,19 +44,7 @@ const signup = async (req, res) => {
       { expiresIn: "1h" }
     );
 
-    // for automatic login after signup
-    req.session.user = {
-      id: user._id,
-      username: user.username,
-      email: user.email,
-      token,
-    };
-     req.session.save((err) => {
-      if (err) {
-        console.error('Error saving session:', err);
-        // Respond with a server error if session saving fails
-        return res.status(500).json({ message: "Login failed due to session saving error", success: false });
-      }
+    
 
     // Return the created user without the password
     res.status(201).json({
@@ -70,10 +58,10 @@ const signup = async (req, res) => {
             followers: user.followers.length,
             following: user.following.length,
             favorites: user.favorites.length,
-        }, 
+            token: token
+        },
         success: true,
     });
-  });
   } catch (error) {
     if (error) {
       return res

@@ -1,7 +1,5 @@
 import express from 'express';
-import session from 'express-session';
 import mongoose from 'mongoose';
-import MongoStore from 'connect-mongo'; // Import connect-mongo for session storage in MongoDB
 import dotenv from 'dotenv';
 dotenv.config(); // Load environment variables from .env file
 import cors from 'cors';
@@ -52,25 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.DB_URI,
-    autoRemove: 'native',
-    collectionName: 'sessions',
-    ttl: 60 * 60 // Session TTL in seconds (1 hour)
-  }),
-  cookie: {
-    maxAge: 1000 * 60 * 60, // Cookie lifespan in milliseconds (1 hour)
-    httpOnly: true, // Prevent client-side JavaScript access to the cookie
 
-    // *** CRITICAL COOKIE SETTINGS FOR DEPLOYMENT/CORS ***
-    secure: true, // Set to true in production (HTTPS), false in development (HTTP)
-    sameSite: 'none', // 'none' for cross-site requests with `secure: true`
-  }
-}));
 
 
 
@@ -88,7 +68,7 @@ app.get('/', (req, res) => {
 import signup from './routes/signup.js';
 import login from './routes/login.js';
 import logout from './routes/logout.js';
-import checkSession from './routes/check_session.js'; // Import the route for checking session
+import userAuth from './routes/user_auth.js'; // Import the route for checking session
 //  movie-related routes
 import addToFavorites from './routes/add_to_favorites.js';
 import createWatchlist from './routes/create_watchlist.js';
@@ -142,7 +122,7 @@ app.use(unfollowUser); // Use the route for unfollowing a user
 app.use(shareWatchlist); // Use the route for sharing a watchlist
 app.use(getSharedList); // Use the route for getting a shared list
 app.use(getMovies); // Use the route for getting movies
-app.use(checkSession); // Use the route for checking session status
+app.use(userAuth); // Use the route for authenticating user 
 app.use(getWatchlistStatus); // Use the route for getting watchlist status
 app.use(getFavoriteStatus); // Use the route for getting favorite status
 app.use(removeFromFavourites); // Use the route for removing from favorites

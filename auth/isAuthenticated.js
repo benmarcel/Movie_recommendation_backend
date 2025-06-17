@@ -3,15 +3,25 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const isAuthenticated = (req, res, next) => {
-    const sessionUser = req.session.user;
-    if (!sessionUser || !sessionUser.token) {
-        return res.status(401).json({ message: "Unauthorized access" });
-    }
+   
+    const authHeader = req.headers['authorization'];
     try {
-        // Verify the JWT token
-        const decoded = jwt.verify(sessionUser.token, process.env.JWT_SECRET);
-        req.user = decoded; // Attach user info to the request object
-        next(); // Proceed to the next middleware or route handler
+  const token = authHeader && authHeader.split(' ')[1]; // Format: Bearer TOKEN
+
+        if (token == null) {
+            // No token provided
+            return res.status(401).json({ message: 'Unauthorized: No token provided.' });
+        }
+
+        jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+            if (err) {
+      // Token is invalid or expired
+      return res.status(403).json({ message: 'Forbidden: Invalid or expired token.' });
+    }
+    // Token is valid, attach user payload to request
+    req.user = user;
+    next(); // Proceed to the next middleware/route handler
+  });
     } catch (error) {
         return res.status(401).json({ message: "Invalid token", error: error.message });
     }
