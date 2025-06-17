@@ -1,5 +1,5 @@
-import Watchlist from "../../models/watchlist_schema.js";
-import User from "../../models/user_schema.js";
+import Watchlist from "../models/watchlist_schema.js";
+import User from "../models/user_schema.js";
 
 
 const createWatchlist = async (req, res) => {

@@ -1,5 +1,5 @@
-import Movie from "../../models/movie_schema.js";
-import Watchlist from "../../models/watchlist_schema.js";
+import Movie from "../models/movie_schema.js";
+import Watchlist from "../models/watchlist_schema.js";
 const getWatchlistStatus = async (req, res) => {
   const { tmdbId } = req.params;
   const userId = req.user.id;

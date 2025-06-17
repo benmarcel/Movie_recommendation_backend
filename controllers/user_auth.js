@@ -1,5 +1,5 @@
 
-import User from '../../models/user_schema.js';
+import User from '../models/user_schema.js';
 // New endpoint to check session status and return user data
 const userAuth = (req, res) => {
   async (req, res) => {

@@ -1,12 +1,12 @@
-import User from "../../models/user_schema.js";
+import User from "../models/user_schema.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 dotenv.config();
 
 const login = async (req, res) => {
+  // form validation
   const { email, password } = req.body;
-
   if (!email || !password) {
     return res.status(400).json({ message: "Email and password are required", success: false });
   }

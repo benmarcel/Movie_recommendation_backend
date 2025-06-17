@@ -1,16 +1,16 @@
-import Movie from "../../models/movie_schema.js";
-import review from "../../models/review_schema.js";
+import Movie from "../models/movie_schema.js";
+import review from "../models/review_schema.js";
 
-const commentMovie = async (req, res) => {
+const rateMovie = async (req, res) => {
   const userId = req.user.id;
-  const {comment } = req.body;
+  const { rating } = req.body;
   const movieId = req.params.id; // Assuming the movie ID is passed as a URL parameter
 
   // Validate input
-  if (!movieId || !comment) {
+  if (!movieId || !rating) {
     return res
       .status(400)
-      .json({ message: "Movie ID and comment are required" });
+      .json({ message: "Movie ID and rating are required" });
   }
 
   try {
@@ -20,24 +20,24 @@ const commentMovie = async (req, res) => {
       return res.status(404).json({ message: "Movie not found" });
     }
 
-    // Add or update review with comment
+    // Add or update review
     const updatedReview = await review.findOneAndUpdate(
       { userId, movieId: movie._id },
       {
-        comment,
+        rating,
         createdAt: new Date(),
       },
       { upsert: true, new: true }
     );
     res.status(201).json({
-      message: "Comment added successfully",
+      message: "Movie rated successfully",
       updatedReview,
     });
   } catch (error) {
     return res
       .status(500)
-      .json({ message: "Error saving comment", error: error.message });
+      .json({ message: "Error saving movie", error: error.message });
   }
 };
 
-export default commentMovie;
+export default rateMovie ;

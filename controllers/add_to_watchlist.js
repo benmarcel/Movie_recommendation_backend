@@ -1,6 +1,6 @@
 
-import Watchlist from "../../models/watchlist_schema.js";
-import getOrCreateMovieLocally from "../../services/get_or_createMovieLocally.js";
+import Watchlist from "../models/watchlist_schema.js";
+import getOrCreateMovieLocally from "../services/get_or_save_movie.js";
 
 // --- WATCHLIST Logic ---
 const addToWatchlist = async (req, res) => {

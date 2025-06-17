@@ -1,4 +1,4 @@
-import Review from '../../models/review_schema.js';
+import Review from '../models/review_schema.js';
 
 const getMovieReview = async (req, res) => {
     const { movieId } = req.params;

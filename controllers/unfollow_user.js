@@ -1,4 +1,4 @@
-import User from '../../models/user_schema.js';
+import User from '../models/user_schema.js';
 
 const unfollowUser = async (req, res) => {
     const userId = req.user.id; // User performing the action

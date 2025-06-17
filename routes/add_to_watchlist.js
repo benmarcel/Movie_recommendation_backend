@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import addToWatchlist from '../controllers/movie_handler/add_to_watchlist.js';
+import addToWatchlist from '../controllers/add_to_watchlist.js';
 // middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Route to add a movie to the user's watchlist
 router.post('/watchlist/add', isAuthenticated, addToWatchlist);
 // This route allows authenticated users to add a movie to their watchlist

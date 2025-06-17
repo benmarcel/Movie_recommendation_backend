@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-import getSharedList from '../controllers/social_interaction/get_sharedList.js';
-import isAuthenticated from '../auth/isAuthenticated.js';
+import getSharedList from '../controllers/get_sharedList.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Define the GET route for retrieving a shared list
 router.get('/watchlist/shared', isAuthenticated, getSharedList);
 // This route allows authenticated users to retrieve a shared list

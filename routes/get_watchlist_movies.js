@@ -1,9 +1,9 @@
 import express from 'express';
 const router = express.Router();
 
-import getWatchlistMovies from '../controllers/movie_handler/get_watchlist_movie.js';
+import getWatchlistMovies from '../controllers/get_watchlist_movie.js';
 // middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Route to get a user's watchlist
 router.get('/watchlistMovies/:name', isAuthenticated, getWatchlistMovies);     
 // This route allows authenticated users to retrieve their watchlist

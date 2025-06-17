@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-import deleteUser from '../controllers/user_access/delete_user.js';
-import isAuthenticated from '../auth/isAuthenticated.js';
+import deleteUser from '../controllers/delete_user.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 // Define the DELETE route for deleting a user account
 router.delete('/user/delete', isAuthenticated, deleteUser);

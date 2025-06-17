@@ -2,11 +2,11 @@ import express from 'express';
 const router = express.Router();
 
 // Import the followUser controller function
-import followUser from '../controllers/social_interaction/follow_user.js';
+import followUser from '../controllers/follow_user.js';
 // followUser controller function  handles the logic for following a user
 
 // Middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // This middleware checks if the user is logged in before allowing access to the route
 // isAuthenticated middleware protects the route
 

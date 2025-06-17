@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import removeFromWatchlist from '../controllers/movie_handler/remove_from_watchlist.js';
+import removeFromWatchlist from '../controllers/remove_from_watchlist.js';
 // middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Route to remove a movie from the user's watchlist
 router.delete('/removefromwatchlist/:tmdbId', isAuthenticated, removeFromWatchlist);
 // This route allows authenticated users to remove a movie from their watchlist

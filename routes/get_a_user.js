@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
 
-import getAUser from "../controllers/social_interaction/get_a_user.js";
-import isAuthenticated from "../auth/isAuthenticated.js";
+import getAUser from "../controllers/get_a_user.js";
+import isAuthenticated from "../middleware/isAuthenticated.js";
 // Route to get a specific user by ID
 router.get("/user/:id", isAuthenticated, getAUser);
 // This route allows authenticated users to retrieve a specific user's details by their ID

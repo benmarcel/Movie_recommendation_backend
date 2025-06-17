@@ -1,5 +1,5 @@
-import Watchlist from "../../models/watchlist_schema.js";
-import Movie from "../../models/movie_schema.js";
+import Watchlist from "../models/watchlist_schema.js";
+import Movie from "../models/movie_schema.js";
 
 
 const getWatchlistMovies = async (req, res) => {

@@ -1,4 +1,4 @@
-import User from '../../models/user_schema.js';
+import User from '../models/user_schema.js';
 import dotenv from "dotenv";
 dotenv.config()
 

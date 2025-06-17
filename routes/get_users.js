@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-import getUsers from '../controllers/social_interaction/get_users.js';
-import isAuthenticated from '../auth/isAuthenticated.js';
+import getUsers from '../controllers/get_users.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Route to get all users
 router.get('/users', isAuthenticated, getUsers);
 // This route allows authenticated users to retrieve a list of all users

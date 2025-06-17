@@ -1,4 +1,4 @@
-import Watchlist from '../../models/watchlist_schema.js';
+import Watchlist from '../models/watchlist_schema.js';
 
 const getSharedWatchlists = async (req, res) => {
   const userId = req.user.id;

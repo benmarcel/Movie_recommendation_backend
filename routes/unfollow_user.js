@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-import unfollowUser from '../controllers/social_interaction/unfollow_user.js';
-import isAuthenticated from '../auth/isAuthenticated.js';
+import unfollowUser from '../controllers/unfollow_user.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Define the POST route for unfollowing a user
 router.post('/user/unfollow/:id', isAuthenticated, unfollowUser);
 // This route allows authenticated users to unfollow another user

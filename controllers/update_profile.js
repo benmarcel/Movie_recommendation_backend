@@ -1,4 +1,4 @@
-import User from "../../models/user_schema.js";
+import User from "../models/user_schema.js";
 const updateProfile = async (req, res) => {
   try {
     const userId = req.user.id;

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import logoutController from '../controllers/user_access/logout.js'; // Import the logout controller
+import logoutController from '../controllers/logout.js'; // Import the logout controller
 // Ensure the path is correct based on your project structure
 // Define the logout route
 // This route handles user logout requests

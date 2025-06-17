@@ -1,4 +1,4 @@
-import User from '../../models/user_schema.js';
+import User from '../models/user_schema.js';
 
 const getOneUser = async (req, res) => {
   const userId = req.params.id; // Assuming the user ID is passed as a URL parameter

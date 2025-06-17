@@ -1,5 +1,5 @@
-import Movie from "../../models/movie_schema.js";
-import Watchlist from "../../models/watchlist_schema.js";
+import Movie from "../models/movie_schema.js";
+import Watchlist from "../models/watchlist_schema.js";
 // This function removes a movie from the user's watchlist.
 /**
  * This function removes a movie from the user's watchlist.

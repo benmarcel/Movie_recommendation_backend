@@ -1,5 +1,5 @@
-import User from "../../models/user_schema.js";
-import getOrCreateMovieLocally from "../../services/get_or_createMovieLocally.js";
+import User from "../models/user_schema.js";
+import getOrCreateMovieLocally from "../services/get_or_save_movie.js";
 
 // --- FAVORITES Logic ---
 export const addFavorites = async (req, res) => {

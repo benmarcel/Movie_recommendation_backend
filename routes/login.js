@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import loginController from '../controllers/user_access/login.js'; // Import the login controller
+import loginController from '../controllers/login.js'; // Import the login controller
 // Ensure the path is correct based on your project structure
 // Define the login route
 // This route handles user login requests

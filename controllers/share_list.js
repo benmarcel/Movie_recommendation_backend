@@ -1,5 +1,5 @@
-import Watchlist from '../../models/watchlist_schema.js';
-import User from '../../models/user_schema.js';
+import Watchlist from '../models/watchlist_schema.js';
+import User from '../models/user_schema.js';
 const shareWatchlistWithUser = async (req, res) => {
     const userId = req.user.id;
     const { watchlistId, targetEmail} = req.body;

@@ -1,6 +1,6 @@
 import express from 'express';
 const router = express.Router();
-import signupController from '../controllers/user_access/signup.js'; // Import the signup controller
+import signupController from '../controllers/signup.js'; // Import the signup controller
 // Ensure the path is correct based on your project structure
 // Define the signup route
 // This route handles user signup requests

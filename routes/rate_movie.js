@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import  rateMovie from '../controllers/movie_handler/rate_movie.js';
+import  rateMovie from '../controllers/rate_movie.js';
 // middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 
 // Route to post a review for a movie
 router.post('/movie/:id/rate', isAuthenticated, rateMovie);

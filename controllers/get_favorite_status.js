@@ -1,5 +1,5 @@
-import Movie from  "../../models/movie_schema.js";
-import User from "../../models/user_schema.js";
+import Movie from  "../models/movie_schema.js";
+import User from "../models/user_schema.js";
 
 // This function checks if a movie is in the user's favorites list.
 const getFavoritesStatus = async (req, res) => {

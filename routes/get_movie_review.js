@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import getMovieReview from '../controllers/movie_handler/get_movie_review.js';
+import getMovieReview from '../controllers/get_movie_review.js';
 // middleware to check if user is authenticated
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Route to get a movie review
 router.get('/movie/:id/review', isAuthenticated, getMovieReview);
 // This route allows authenticated users to retrieve a movie review

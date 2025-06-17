@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
 
-import shareList from '../controllers/social_interaction/share_list.js';
-import isAuthenticated from '../auth/isAuthenticated.js';
+import shareList from '../controllers/share_list.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // Define the POST route for sharing a list
 router.post('/watchlist/share', isAuthenticated, shareList);
 // This route allows authenticated users to share a list

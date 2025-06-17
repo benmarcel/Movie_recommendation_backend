@@ -1,10 +1,10 @@
 import express from 'express';
 
 const router = express.Router();
-import getProfile from '../controllers/user_access/get_profile.js';
+import getProfile from '../controllers/get_profile.js';
 
 // Import the authentication middleware to protect the profile routes
-import isAuthenticated from '../auth/isAuthenticated.js';
+import isAuthenticated from '../middleware/isAuthenticated.js';
 // This middleware checks if the user is authenticated before allowing access to the profile routes
 // The isAuthenticated middleware will verify the user's session and JWT token
 // If the user is authenticated, it will allow access to the profile routes

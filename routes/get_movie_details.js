@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import getMovieDetails from "../controllers/movie_handler/get_movie_details.js";
+import getMovieDetails from "../controllers/get_movie_details.js";
 // middleware to check if user is authenticated
-import isAuthenticated from "../auth/isAuthenticated.js";
+import isAuthenticated from "../middleware/isAuthenticated.js";
 // Route to get the details of a movie
 router.get("/movies/:tmdbId", isAuthenticated, getMovieDetails);
 // This route allows authenticated users to get the details of a movie

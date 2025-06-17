@@ -1,8 +1,8 @@
 import express from "express";
 const router = express.Router();
-import displayWatchlist from "../controllers/movie_handler/display_watchlist.js";
+import displayWatchlist from "../controllers/display_watchlist.js";
 
-import isAuthenticated from "../auth/isAuthenticated.js";
+import isAuthenticated from "../middleware/isAuthenticated.js";
 
 router.get("/watchlists", isAuthenticated, displayWatchlist);
 

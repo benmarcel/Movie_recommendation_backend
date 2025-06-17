@@ -1,10 +1,10 @@
 import express from "express";
 const router = express.Router();
 
-import addFavorites from "../controllers/movie_handler/add_to_favorites.js";
+import addFavorites from "../controllers/add_to_favorites.js";
 
 // middleware to check if user is authenticated
-import isAuthenticated from "../auth/isAuthenticated.js"
+import isAuthenticated from "../middleware/isAuthenticated.js"
 
 router.post("/favorites/add", isAuthenticated, addFavorites);
 // Route to add a movie to the user's favorites

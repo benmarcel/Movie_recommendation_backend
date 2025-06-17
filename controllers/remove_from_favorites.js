@@ -1,5 +1,5 @@
-import User from "../../models/user_schema.js";
-import Movie from "../../models/movie_schema.js";
+import User from "../models/user_schema.js";
+import Movie from "../models/movie_schema.js";
 
 // --- REMOVE FROM FAVORITES Logic ---
  const removeFromFavorites = async (req, res) => {
