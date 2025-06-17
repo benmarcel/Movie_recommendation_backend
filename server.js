@@ -55,13 +55,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.get('/', (req, res) => {
-  if (req.session.views) {
-    req.session.views++;
-    res.send(`Views: ${req.session.views}`);
-  } else {
-    req.session.views = 1;
-    res.send('Welcome! Refresh to count views.');
-  }
+ res.send('Welcome to the Movie Recommendation API!'); // Simple welcome message
 });
 
 // user access routes
