@@ -50,7 +50,7 @@ app.use(express.urlencoded({ extended: true }));
 // Session middleware
 // const isProduction = process.env.NODE_ENV === 'production';
 
-const isProduction = process.env.NODE_ENV === 'production'; // Determine if in production environment
+
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -67,8 +67,8 @@ app.use(session({
     httpOnly: true, // Prevent client-side JavaScript access to the cookie
 
     // *** CRITICAL COOKIE SETTINGS FOR DEPLOYMENT/CORS ***
-    secure: isProduction, // Set to true in production (HTTPS), false in development (HTTP)
-    sameSite: isProduction ? 'none' : 'lax', // 'none' for cross-site requests with `secure: true`, 'lax' for local
+    secure: true, // Set to true in production (HTTPS), false in development (HTTP)
+    sameSite: 'none', // 'none' for cross-site requests with `secure: true`
   }
 }));
 
