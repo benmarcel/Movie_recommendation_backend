@@ -25,7 +25,7 @@ app.use(express.json());
 // CORS middleware
 const allowedOrigins = [
   'http://localhost:5173', // Your development frontend
-  'https://your-deployed-frontend.com' // Your deployed frontend domain
+  'https://685172266cd7d0268d28c184--movierecc.netlify.app/' // Your deployed frontend domain
   // Add other origins if your API serves multiple frontends
 ];
 
