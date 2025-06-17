@@ -17,4 +17,4 @@ const userAuth = (req, res) => {
 };
 };
 
-export default checkSession;
+export default userAuth;
