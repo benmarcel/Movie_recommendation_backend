@@ -46,13 +46,6 @@ app.use(cors({
 // Middleware to parse URL-encoded bodies
 app.use(express.urlencoded({ extended: true }));
 
-// Session middleware
-// const isProduction = process.env.NODE_ENV === 'production';
-
-
-
-
-
 
 
 app.get('/', (req, res) => {
