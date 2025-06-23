@@ -3,7 +3,7 @@ const router = express.Router();
 
 // import isAuthenticated from '../auth/isAuthenticated.js'; // Import your authentication middleware
 import checkStatus from '../controllers/user_auth.js';
-import isAuthenticated from '../auth/isAuthenticated.js'; // Import your authentication middleware
+import isAuthenticated from '../middleware/isAuthenticated.js'; // Import your authentication middleware
 
 // Define the route for checking session status
 router.get('/me', isAuthenticated, checkStatus); // Ensure the user is authenticated before accessing this route
